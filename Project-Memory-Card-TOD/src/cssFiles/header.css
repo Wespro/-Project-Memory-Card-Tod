@@ -1,0 +1,14 @@
+.gameInfo {
+  position: relative;
+}
+.scoreCont {
+  display: flex;
+  gap: 3rem;
+  justify-content: space-evenly;
+}
+.howToPlayBtn {
+  font-size: 1.2rem;
+}
+.howToPlayP {
+  visibility: hidden;
+}
