@@ -5,7 +5,7 @@
   grid-template-rows: auto;
 }
 .card {
-  min-height: 250px;
+  min-height: 200px;
   border: 3px solid black;
   display: flex;
   flex-direction: column;
@@ -13,24 +13,29 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;
-
   color: black;
   font-size: 1.1rem;
   background-color: gold;
+  transition: 100ms ease;
+  cursor: pointer;
 }
-
+.card:hover {
+  box-shadow: 3px 3px 20px #ffbb00;
+  transform: scale(1.02);
+}
 .cardImg {
   display: flex;
   align-items: center;
   justify-content: center;
   object-fit: cover;
-  width: 100%;
+  width: 80%;
 }
 .imgCont {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-width: 250px;
-  min-height: 300px;
+  min-height: 250px;
   padding: 1rem;
   background-color: rgb(29, 29, 29);
   border-radius: 10px;

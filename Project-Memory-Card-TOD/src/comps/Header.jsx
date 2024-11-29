@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "../cssFiles/header.css";
-export default function Header() {
+export default function Header({ score, bestScore }) {
+  const [howToPlayOn, setHowToPlayOn] = useState(false);
+  function handleHowTopPlay(e) {
+    const howToPlayP = document.querySelector(".howToPlayP");
+    console.log(howToPlayP);
+    if (howToPlayP.style.display === "none") {
+      howToPlayP.style.display = "block";
+      setHowToPlayOn(true);
+    } else {
+      howToPlayP.style.display = "none";
+      setHowToPlayOn(false);
+    }
+  }
   return (
     <header>
       <h1 className="HeaderH1">Void's Memory Game</h1>
       <div className="gameInfo">
         <div className="scoreCont">
-          <h2 className="score">Score: 0 </h2>
-          <h2 className="bestScore">Best score: 0</h2>
+          <h2 className="score">Score: {score} </h2>
+          <h2 className="bestScore">Best score: {bestScore}</h2>
         </div>
         <div className="howToPlay">
-          <button className="howToPlayBtn">How To Play</button>
-          <h2 className="howToPlayP">
-            Get points by clicking on an image but don't click on any more than
-            once!
+          <button onClick={handleHowTopPlay} className="howToPlayBtn">
+            How To Play
+          </button>
+          <h2 style={{ display: "none" }} className="howToPlayP">
+            Click a card only once to earn pionts.
           </h2>
         </div>
       </div>
