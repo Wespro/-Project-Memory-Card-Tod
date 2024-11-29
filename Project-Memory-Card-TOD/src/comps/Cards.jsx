@@ -2,7 +2,8 @@ import React, { useEffect, useState, useId } from "react";
 import Card from "./Card";
 import { data } from "./tmepData";
 import "../cssFiles/cards.css";
-// import "../assets/sounds/correct-6033";
+import Correct from "../assets/sounds/correct.mp3";
+import Wrong from "../assets/sounds/wrong.mp3";
 export default function Cards({ score, setScore, setBestScore }) {
   const [pokemonListInitial, setPokemonListInitial] = useState([]);
   const [pokemonList, setPokemonList] = useState([]);
@@ -52,9 +53,11 @@ export default function Cards({ score, setScore, setBestScore }) {
         return pervS + 1;
       });
       playSound(true);
+      screenFlash("green");
       return false;
     }
     playSound(false);
+    screenFlash("red");
     return true;
   }
   //////////////////////////////////////////
@@ -69,13 +72,22 @@ export default function Cards({ score, setScore, setBestScore }) {
   //////////////////////////////////////////
   function playSound(response) {
     if (response) {
-      const correct = new Audio("../assets/sounds/correct-6033.mb3");
-      console.log(correct);
-      correct.play;
+      const correct = new Audio(Correct);
+      correct.play();
     } else {
-      const wrong = new Audio("../assets/sounds/wrong.mp3");
-      wrong.play;
+      const wrong = new Audio(Wrong);
+      wrong.play();
     }
+  }
+  //////////////////////////////////////////
+  function screenFlash(color) {
+    const screenFlashNode = document.querySelector(".screenFlash");
+    setTimeout(() => {
+      screenFlashNode.style.backgroundColor = color;
+    }, 0);
+    setTimeout(() => {
+      screenFlashNode.style.backgroundColor = "transparent";
+    }, 100);
   }
   //////////////////////////////////////////
   function CardsDisplay() {

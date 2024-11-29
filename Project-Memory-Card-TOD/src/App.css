@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  min-height: 100%;
 }
 
 .logo {
@@ -43,4 +44,14 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.screenFlash {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.3;
+  pointer-events: none;
 }
