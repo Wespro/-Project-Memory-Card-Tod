@@ -4,7 +4,7 @@ import { data } from "./tmepData";
 import "../cssFiles/cards.css";
 import Correct from "../assets/sounds/correct.mp3";
 import Wrong from "../assets/sounds/wrong.mp3";
-export default function Cards({ score, setScore, setBestScore }) {
+export default function Cards({ score, bestScore, setScore, setBestScore }) {
   const [pokemonListInitial, setPokemonListInitial] = useState([]);
   const [pokemonList, setPokemonList] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -38,15 +38,24 @@ export default function Cards({ score, setScore, setBestScore }) {
       [newCards[i], newCards[random]] = [newCards[random], newCards[i]];
     }
 
-    if (!isSelected(e)) {
-      setPokemonList(newCards);
+    if (score < 9) {
+      if (!isSelected(e)) {
+        setPokemonList(newCards);
+      } else {
+        resetGame();
+        gameResult("lose");
+      }
     } else {
-      resetGame();
+      playSound(true);
+      screenFlash("green");
+      gameResult("win");
+      resetGame(10);
     }
   }
   //////////////////////////////////////////
   function isSelected(e) {
     const cardKey = e.target.attributes.datakey.value;
+
     if (!selectedCards.includes(cardKey)) {
       setSelectedCards([...selectedCards, cardKey]);
       setScore((pervS) => {
@@ -61,11 +70,14 @@ export default function Cards({ score, setScore, setBestScore }) {
     return true;
   }
   //////////////////////////////////////////
-  function resetGame() {
+  function resetGame(win) {
     console.log("here");
     setSelectedCards([]);
     setPokemonList(pokemonListInitial);
-    setBestScore((prevScore) => (prevScore > score ? prevScore : score));
+    !win
+      ? setBestScore((prevScore) => (prevScore > score ? prevScore : score))
+      : setBestScore(win);
+
     setScore(0);
     setSelected(null);
   }
@@ -77,6 +89,14 @@ export default function Cards({ score, setScore, setBestScore }) {
     } else {
       const wrong = new Audio(Wrong);
       wrong.play();
+    }
+  }
+  //////////////////////////////////////////
+  function gameResult(response) {
+    if (response === "lose") {
+      alert(`Try again, your best score is ${score}`);
+    } else if (response === "win") {
+      alert(`You won great job`);
     }
   }
   //////////////////////////////////////////
