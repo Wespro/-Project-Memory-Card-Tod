@@ -30,10 +30,6 @@ function App() {
         Copyright © 2024
         <a href="https://github.com/Wespro"> Abdelrahman Mohammed</a>
       </footer>
-      <script
-        src="./js files/Game Related/domInteractions.js "
-        type="module"
-      ></script>
     </>
   );
 }
