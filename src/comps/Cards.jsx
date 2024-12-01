@@ -94,7 +94,9 @@ export default function Cards({ score, bestScore, setScore, setBestScore }) {
   //////////////////////////////////////////
   function gameResult(response) {
     if (response === "lose") {
-      alert(`Try again, your best score is ${score}`);
+      alert(
+        `Try again, your best score is ${score > bestScore ? score : bestScore}`
+      );
     } else if (response === "win") {
       alert(`You won great job`);
     }
